@@ -1,0 +1,18 @@
+{
+  "terminal-image": {
+    "items": [
+      { "label": "Save Image As...", "id": "terminal-save-image" },
+      { "type": "separator" }
+    ]
+  },
+
+  "terminal": {
+    "items": [
+      { "label": "Select All", "id": "terminal-select-all", "accelerator": "Ctrl+A" },
+      { "label": "Copy", "id": "terminal-copy", "accelerator": "Ctrl+Insert" },
+      { "label": "Paste", "id": "terminal-paste", "accelerator": "Ctrl+Shift+Insert" },
+      { "type": "separator" },
+      { "label": "Clear Shell", "id": "terminal-clear-shell", "accelerator": "Alt+F8" }
+    ]
+  }
+}

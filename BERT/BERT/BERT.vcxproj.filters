@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{171a378d-f603-4cdf-9c66-cec0b65d95cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{6839659f-062b-40ca-acbd-14d0e71b613a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExcelLib">
+      <UniqueIdentifier>{e89b11b5-95b2-4c71-af28-3347bcfcc847}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PB">
+      <UniqueIdentifier>{7cf281e1-904c-4b27-a3bc-37af0696e5a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{26c08613-c867-4dc2-a9ef-70457c409b79}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\stdafx.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\targetver.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="ExcelLib\XLCALL.H">
+      <Filter>ExcelLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PB\variable.pb.h">
+      <Filter>PB</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="include\bert.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\type_conversions.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\basic_functions.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\bert_version.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\com_object_map.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\function_descriptor.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\excel_com_type_libraries.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\callback_info.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\file_change_watcher.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\debug_functions.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\process_exit_codes.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\json11\json11.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\string_utilities.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\excel_api_functions.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\message_utilities.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\windows_api_functions.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\module_functions.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\bert_graphics.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\language_desc.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\language_service.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\PB\variable.proto">
+      <Filter>PB</Filter>
+    </None>
+    <None Include="src\bert.def">
+      <Filter>source</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\dllmain.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="ExcelLib\XLCALL.CPP">
+      <Filter>ExcelLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PB\variable.pb.cc">
+      <Filter>PB</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bert.cc">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\debug_functions.cc">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\basic_functions.cc">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\com_object_map.cc">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excel_api_functions.cc">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\file_change_watcher.cc">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\json11\json11.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\message_utilities.cc">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\windows_api_functions.cc">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\module_functions.cc">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bert_graphics.cc">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\language_service.cc">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\language_desc.cc">
+      <Filter>source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BERT.rc" />
+  </ItemGroup>
+</Project>

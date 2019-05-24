@@ -1,0 +1,150 @@
+/**
+ * Copyright (c) 2017-2018 Structured Data, LLC
+ * 
+ * This file is part of BERT.
+ *
+ * BERT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * BERT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with BERT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#list-measurement-node {
+  position: absolute;
+  top: -1000px;
+  left: -1000px;
+}
+
+.list-container {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.list-header {
+  padding-bottom: .5em;
+}
+
+.list-body {
+  overflow: scroll;
+  flex-grow: 1;
+  border: 1px solid #ccc;
+}
+
+.list-inner-body {
+  position: relative;
+  overflow: hidden;
+}
+
+.list-body-entry {
+  white-space: nowrap;
+  padding: 0;
+  margin: 0;
+}
+
+// FIXME: this should probably move
+
+// hack: we need this node or the containing flex layout doesn't work; 
+// the header gets compressed because it's not measured properly
+
+.list-header-layout {
+
+  display: flex;
+  align-items: center;
+
+  div {
+    flex-grow: 2;
+  }
+
+  input {
+    flex-grow: 1;
+    display: block;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 1px .35em;
+  }
+}
+
+.dialog_container.cran-mirror-chooser {
+  height: 70%;
+  width: 30%;
+}
+
+.dialog_container.cran-package-chooser {
+  height: 70%;
+  width: 50%;
+}
+
+.cran-package-list, .cran-mirror-list {
+  font-family: "Segoe UI";
+
+  .list-body-entry {
+    padding: 3px 6px;
+    border-bottom: 1px solid #ccc;
+    width: auto;
+  }
+}
+
+.cran-package-list {
+
+  .list-body-entry {
+
+    &.installed {
+      color: #aaa;
+    }
+
+    &.selected {
+      background: #66cc99;
+      color: #fff;
+    }
+
+    display: flex;
+    flex-direction: row;
+
+    .list-entry-name {
+      cursor: default;
+      font-weight: 600;
+    }
+
+    .list-entry-description {
+      cursor: default;
+      padding-left: .5em;
+    }
+  }
+}
+
+.cran-mirror-list {
+  .list-body-entry {
+
+    .list-entry-header {
+      cursor: default;
+    }
+
+    .list-entry-subheader {
+      cursor: default;
+      font-size: .8em;
+    }
+
+    &.selected {
+      background: #66cc99;
+      color: #fff;
+    }
+
+  }
+}
+

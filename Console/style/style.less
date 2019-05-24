@@ -1,0 +1,50 @@
+/**
+ * Copyright (c) 2017-2018 Structured Data, LLC
+ * 
+ * This file is part of BERT.
+ *
+ * BERT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * BERT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with BERT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  font-family: consolas;
+  font-size: 14px;
+}
+
+#main-window {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  overflow:hidden;
+}
+
+@import "terminal3.less";
+@import "terminal_overlay.less";
+@import "tab_panel.less";
+@import "editor.less";
+@import "splitter_window.less";
+@import "dialog.less";
+@import "markdown.less";
+@import "alert.less";
+@import "virtual-list.less";

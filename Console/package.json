@@ -1,0 +1,52 @@
+{
+  "version": "2.4.3",
+  "main": "main.js",
+  "name": "bert2-console",
+  "build": {
+    "directories": {
+      "output": "../Build/Console"
+    },
+    "win": {
+      "target": "dir"
+    },
+    "files": [
+      "ext/**/*",
+      "data/**/*",
+      "build/**/*",
+      "generated/*",
+      "main.js",
+      "index.html"
+    ],
+    "icon": "bert2.ico"
+  },
+  "scripts": {
+    "start": "electron .",
+    "clean": "rm -fr build/*",
+    "build": "./node_modules/.bin/less-watch-compiler --run-once && ./node_modules/.bin/tsc",
+    "watch": "./node_modules/.bin/less-watch-compiler & ./node_modules/.bin/tsc --watch &",
+    "package": "./node_modules/.bin/electron-builder",
+    "repackage": "./node_modules/.bin/less-watch-compiler --run-once && ./node_modules/.bin/tsc && ./node_modules/.bin/electron-builder"
+  },
+  "devDependencies": {
+    "@types/node": "^8.9.1",
+    "asar": "^0.14.1",
+    "electron": "^1.8.2",
+    "electron-builder": "^19.56.0",
+    "less-watch-compiler": "^1.11.0",
+    "typescript": "^2.7.2"
+  },
+  "dependencies": {
+    "@types/text-encoding": "^0.0.32",
+    "chokidar": "^2.0.1",
+    "electron-reload": "^1.2.2",
+    "electron-window-state": "^4.1.1",
+    "google-protobuf": "^3.5.0",
+    "js-base64": "^2.4.3",
+    "less": "^3.0.1",
+    "markdown-it": "^8.4.0",
+    "markdown-it-task-lists": "^2.1.0",
+    "monaco-editor": "^0.10.1",
+    "rxjs": "^5.5.6",
+    "xterm": "^3.2.0"
+  }
+}

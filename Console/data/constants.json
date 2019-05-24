@@ -1,0 +1,71 @@
+{
+  "documentation": [
+    "this file contains various constant strings, intended to support",
+    "replacement in other languages. some specific functions -- menus",
+    "in particular -- are defined separately."
+  ],
+
+  "status": {
+    "ready": "Ready",
+    "line": "Line",
+    "column": "Col",
+    "rendered": "Rendered"
+  },
+
+  "files": {
+    "untitled": "Untitled",
+    "preferences": "Preferences",
+    "userStylesheet": "User Stylesheet",
+    "welcome": "Welcome"
+  },
+
+  "editorCommands": {
+    "executeBuffer": "Execute Entire Buffer",
+    "executeSelection": "Execute Selection"
+  },
+
+  "shell": {
+    "imageTypes": "# Images"
+  },
+
+  "errors": {
+    "openFileError": "We couldn't open the file. Please make sure the file exists and is readable."
+  },
+
+  "dialogs": {
+    "selectMirror": {
+      "chooseMirrorTitle": "Choose CRAN Mirror",
+      "selectMirror": "Select a Mirror:",
+      "pleaseWait": "Loading mirror list, please wait...",
+      "setRepo": "Set CRAN repo to #"
+    },
+    "selectPackages": {
+      "selectPackagesTitle": "Select Packages",
+      "selectPackages": "Select Packages:",
+      "pleaseWait": "Loading package list, please wait...",
+      "pleaseWaitInstalled": "Checking installed packages, please wait...",
+      "installed": "installed",
+      "filter": "Filter",
+      "singularSelected": "# Package Selected",
+      "pluralSelected": "# Packages Selected"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "select": "Select",
+      "install": "Install",
+      "ok": "OK"
+    }
+  },
+
+  "updates": {
+    "title": "Version $VERSION is available",
+    "downloadLink": "Download Page",
+    "suppressLink": "Don't Notify me Again"
+  },
+
+  "preferences": {
+    "ok": "Preferences OK",
+    "error": "Preferences Error"
+  }
+
+}

@@ -1,34 +1,8 @@
 
-# target directories and generated build files
-Release
-x64
-ipch
-.vs
-*.ilk
-*.user
-*.aps
-*.pdb
-*.opensdf
-*.sdf
+# folders have local .gitignore files for the various relevant types.
+# this top-level folder is just for R module build artifacts
 
-# generated interface files
-BERTRibbon2/BERTRibbon2_i.c
-BERTRibbon2/BERTRibbon2_i.h
+BERTModule_*.gz
+notes.md
 
-# these aren't distributed (get them from MS)
-BERT/ExcelLib
-
-# generated typelib headers
-*.tlh
-
-# generated binaries
-*.xll
-*.dll
-*.lib
-*.exp
-
-# locale dev
-
-BERT/locale/dev
-
-# ??
+yarn-error.log

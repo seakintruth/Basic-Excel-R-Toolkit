@@ -1,0 +1,78 @@
+/**
+ * Copyright (c) 2017-2018 Structured Data, LLC
+ * 
+ * This file is part of BERT.
+ *
+ * BERT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * BERT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with BERT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+.xterm-annotation-node {
+  border: 1px solid #ccc;
+  margin-left: 1em;
+  box-shadow: 0px 5px 12px 0px rgba(0,0,0,.25);
+
+  // we raise these nodes above the xterm mouse event
+  // layer, so we can get graphics as targets on right
+  // clicks (context menu). not sure what the actual
+  // z-index of the mouse layer is, or if it's constant.
+
+  z-index: 4;
+}
+
+// sigh
+
+.terminal-child {
+  position: absolute;
+  top: 0px;
+  left: 0px; // left: .5em; // this bumps up against the separator. 
+  right: 0px;
+  bottom: 0px;
+  overflow: hidden;
+
+  &>div {
+    position: absolute;
+    top: 0px;
+    left: .5em; // this bumps up against the separator. 
+    right: 0px;
+    bottom: 0px;
+    overflow: hidden;
+  }
+
+}
+
+// some overrides for custom terminal: we allow wide buffers 
+// with horizontal scrolling (...)
+
+.terminal.xterm {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+}
+
+.terminal.xterm .xterm-viewport {
+  overflow-x: scroll;
+  z-index: 2;
+  background-color: transparent !important;
+}
+
+.xterm-graphics-node {
+
+  /* 
+   * we want to guarantee the size of the canvas, otherwise it will 
+   * be scaled and look fuzzy, particularly text
+   */
+  box-sizing: content-box;
+}

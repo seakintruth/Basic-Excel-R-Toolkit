@@ -1,0 +1,388 @@
+/**
+ * Copyright (c) 2017-2018 Structured Data, LLC
+ * 
+ * This file is part of BERT.
+ *
+ * BERT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * BERT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with BERT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * this is intended to be an interchange format for variables in different 
+ * languages/contexts: currently excel (XLOPER12), COM (Variant), R (SEXP), 
+ * javascript (JSON), julia (jl_value), and potentially other languages in 
+ * the future. we have slightly different support requirements depending on 
+ * the platforms.
+ */
+
+syntax = "proto3";
+option optimize_for = SPEED;
+
+// protip: package gets defined as a c++ namespace, so don't use anything 
+// that might otherwise be defined
+
+package BERTBuffers;
+
+/** complex numbers */
+message Complex {
+  double r = 1;
+  double i = 2;
+}
+
+/** array/list/matrix/frame type */
+message Array {
+  int32 rows = 1;
+  int32 cols = 2;
+  repeated Variable data = 3;
+  repeated string rownames = 4;
+  repeated string colnames = 5;
+}
+
+/** error types */
+enum ErrorType {
+  GENERIC = 0;
+  NA = 1;
+  INF = 2;
+  PARSE = 3;
+  EXECUTION = 4;
+  OTHER = 15;
+}
+
+/** error has a type and/or message */
+message Error {
+  ErrorType type = 1;
+  string message = 2;
+}
+
+/** sheet reference */
+message SheetReference {
+  uint32 start_row = 1;
+  uint32 start_column = 2;
+  uint32 end_row = 3;
+  uint32 end_column = 4;
+  uint64 sheet_id = 5;
+}
+
+/** basic variable type, optionally named */
+message Variable {
+  oneof value {
+
+    // could nil/missing roll into error type, or some other flagged 
+    // type? seems like a waste of numbers to have these and have 
+    // them separate. maybe leave unset as default, consider that 
+    // nil/null?
+
+    bool nil = 1;
+    bool missing = 2;
+    Error err = 3;
+
+    // merging int and double types was dumb. let's reverse that ASAP.
+    // FIXME: should these default to 64 bits? why or why not? what is 
+    // the default "double" type? [A: 64]
+
+    // R doesn't support 64-bit integers, so we need to figure out what
+    // to do with them. ATM we use 32-bit for everything, which seems 
+    // dumb also.
+
+    int32 integer = 5;
+    double real = 6;
+
+    string str = 7;
+    bool boolean = 8;
+    Complex cpx = 9;
+    Array arr = 10;
+    SheetReference ref = 11;
+
+    ExternalPointer com_pointer = 12; // taking over, maybe drop the other one
+
+    GraphicsUpdate graphics = 13;
+
+    uint32 cache_reference = 14;
+
+  }	
+  string name = 15;
+}
+
+/** why not have a single string and then split on the RX side? */
+message Code {
+  repeated string line = 1;
+
+  // flag indicates this is startup code; run and then take any
+  // post-init actions. saves a roundtrip transaction.
+  
+  bool startup = 2;
+}
+
+/** distinction between calls and accessors (and accesor type) */
+enum CallType {
+  method = 0;
+  get = 1;
+  put = 2;
+}
+
+enum CallTarget {   
+  language = 0;
+  COM = 1;
+  system = 2;
+  graphics = 3;
+}
+
+/**
+ * consolidating function call, callback, COM function call, 
+ * and control/system calls with arguments 
+ */
+message CompositeFunctionCall {
+
+  string function = 1;
+  repeated Variable arguments = 2;
+
+  // mostly for COM
+
+  uint64 pointer = 3;
+  uint32 index = 4;
+  CallType type = 5;
+
+  // new [enum or string?]
+
+  CallTarget target = 6;
+
+  // see FunctionDescriptor
+
+  uint32 flags = 7;
+
+}
+
+enum GraphicsUpdateCommand {
+  update = 0;
+  query_size = 1;
+}
+
+message GraphicsUpdate {
+  GraphicsUpdateCommand command = 1;
+  string name = 2;
+  string path = 3;
+  uint32 width = 4;
+  uint32 height = 5;
+}
+
+/**
+ * we're now adding graphics to support a console graphics device in R.
+ * might extend to julia, although that will probably be based on GR 
+ * and so a little simpler.
+ *
+ * packing in a variety of different parameters here, this may need to 
+ * get streamlined... we can also do some creative reuse.
+ */
+message GraphicsCommand  {
+  string command = 1;
+  repeated double x = 2;
+  repeated double y= 3;
+  double r = 4;
+  double rot = 5;
+  string text = 6;
+  bool filled = 7;        // flag -- should go in context?
+  double hadj = 8;
+  bytes raster = 9;
+  bool interpolate = 10;  // flag
+
+  // device type
+  string device_type = 14;
+  GraphicsContext context = 15;
+}
+
+/**
+ * although colors are passed as 4x 32-bit, they're 
+ * actually only 8 bits each.
+ *
+ * FIXME: who passes colors as 128 bits? that's not a thing.
+ */
+message Color {
+  uint32 a = 1;
+  uint32 r = 2;
+  uint32 g = 3;
+  uint32 b = 4;
+}
+
+message GraphicsContext {
+
+  Color col = 1;
+	Color fill = 2;
+	double gamma = 3;
+	double lwd = 4;
+  int32 lty = 5;
+	int32 lend = 6;
+
+  // this is a three-value enum (actually defines, but only 3 states)
+  int32 ljoin = 7;
+
+  // also a three-value enum
+  double lmitre = 8;
+  
+	double cex = 9;
+	double ps = 10;
+  double lineheight = 11;
+  
+  // this is another set of flags
+	int32 fontface = 12;
+	string fontfamily = 13;
+
+
+	//bool bold;
+	//bool italic;
+	//double fontsize;
+  //std::string fontname;
+}
+
+message MIMEData {
+  string mime_type = 1;
+  bytes data = 2;
+}
+
+/** console message */
+message Console {
+  oneof message {
+    string text = 1;
+    string err = 2;
+    string prompt = 3;
+    GraphicsCommand graphics = 4;
+    MIMEData mime_data = 5;
+    Variable history = 6;
+  }
+}
+
+
+/**
+ * to date, we've been constructing function descriptions by packing them
+ * in normal variables. for R, we can use the "name" attribute to identify
+ * them. that's not available in Julia (and wouldn't be in some other 
+ * languages either). this results in inconsitent data arriving at Excel,
+ * which requires language-specific handling.
+ *
+ * in an effort to normalize this data, and recognizing that this message
+ * scheme is application-specific, we'll define specific types for function
+ * descriptors (AND com calls, below).
+ *
+ * this type can be used for both the function itself and arguments.
+ */
+message FunctionElement {
+  string name = 1;
+  string type_name = 2;         // not used atm
+  Variable default_value = 3;
+  string description = 4;
+  uint32 index = 5;             // added for COM
+}
+
+/** 
+ * this type describes a function. adding type so we can reuse this for COM
+ */
+message FunctionDescriptor {
+  FunctionElement function = 1;
+  CallType call_type = 2;
+
+  // adding flags: this is an opaque field that languages can use.
+  // it is designed to flag remapped functions in R, but potentially
+  // it has other uses.
+  // 
+  // FIXME: could be consolidated with call_type?
+
+  uint32 flags = 3;
+  string category = 4;
+
+  repeated FunctionElement arguments = 5;
+}
+
+/** 
+ * list of functions. union type can't include arrays, so we need an array.
+ */
+message FunctionList {
+  repeated FunctionDescriptor functions = 1;
+}
+
+/** for COM enums */
+message EnumValue {
+  string name = 1;
+  int32 value = 2;
+}
+
+message EnumType {
+  string name = 1;
+  repeated EnumValue values = 2;
+}
+
+
+/** now we're getting less and less general. not sure that's a good thing. */
+message ExternalPointer {
+
+  string interface_name = 1; // d'oh (don't use the name "interface")
+  uint64 pointer = 2;
+
+  // even though the list type is useless here, it still might be worth
+  // using it so we can standardize functions for walking the list. although 
+  // it's probably just 1 deref, so don't kill yourself overoptimizing.
+
+  //FunctionList functions = 3;
+  repeated FunctionDescriptor functions = 3;
+  repeated EnumType enums = 4;
+
+}
+
+/** 
+ * unifying call and response, since there are some fuzzy cases,
+ * callbacks, and so on. it makes sense for this to be a single 
+ * message with a switch.
+ *
+ * FIXME: let's revert "callback" to a separate field for clarity,
+ * even though it has the same type as function_call; we have space.
+ *
+ * FIXME: we now have two errors -- one in here (top level) and one 
+ * in variable (via result). is that useful? it certainly is 
+ * confusing. I suppose it distinguishes between errors in the function
+ * call and results that are errors...
+ */
+message CallResponse {
+    
+  uint32 id = 1;
+  bool wait = 2;      // FIXME: this can go? should we always require full transactions?
+
+  oneof operation {
+
+    // response types
+
+    string err = 3;             // FIXME: use error type? [yes, work towards that]
+    Variable result = 4;
+
+    // push / notification
+
+    Console console = 5;        // console maybe should be a separate root message, it doesn't need a response
+
+    // call types and callbacks. what's the difference between shell 
+    // command and code? context. shell command executes like it's typed
+    // at the console, code is executed via parse/eval calls. 
+
+    // OK, so why not use a flag then? 
+
+    Code code = 6;
+    string shell_command = 7;
+
+    // function call represents generic function calls, system
+    // commands, and callbacks (including COM function calls).
+   
+    CompositeFunctionCall function_call = 8;
+
+    FunctionList function_list = 9; // can we just include a "repeated" element as a union member? [A: no]
+
+    uint32 user_command = 10;
+
+  }
+}
+

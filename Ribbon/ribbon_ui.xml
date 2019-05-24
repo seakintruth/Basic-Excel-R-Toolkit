@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui" onLoad="RibbonLoaded" loadImage="GetImage">
+
+  <!-- add to, don't replace, the whole ribbon -->
+  <ribbon startFromScratch="false">
+    <tabs>
+
+      <tab idMso="TabAddIns">
+        <group id="g1">
+          <!-- 
+            label was switched to a method in order to insert a non-breaking space, to force layout.
+            that's no longer necessary if we're using the smaller button.
+          -->
+          <button id="b1" getLabel="GetLabel" onAction="ShowConsole" image="console" supertip="Open the BERT console to change settings, write code or run in real time"/>
+        </group>
+
+        <group id="g2" label="BERT User Functions" getVisible="GetUserButtonsVisible">
+          <button id="user1" getImage="GetUserButtonImage" getLabel="GetUserButtonLabel" getVisible="GetUserButtonVisible" onAction="UserButtonAction" getSupertip="GetUserButtonTip" tag="1"/>
+          <button id="user2" getImage="GetUserButtonImage" getLabel="GetUserButtonLabel" getVisible="GetUserButtonVisible" onAction="UserButtonAction" getSupertip="GetUserButtonTip" tag="2"/>
+          <button id="user3" getImage="GetUserButtonImage" getLabel="GetUserButtonLabel" getVisible="GetUserButtonVisible" onAction="UserButtonAction" getSupertip="GetUserButtonTip" tag="3"/>
+          <button id="user4" getImage="GetUserButtonImage" getLabel="GetUserButtonLabel" getVisible="GetUserButtonVisible" onAction="UserButtonAction" getSupertip="GetUserButtonTip" tag="4"/>
+          <button id="user5" getImage="GetUserButtonImage" getLabel="GetUserButtonLabel" getVisible="GetUserButtonVisible" onAction="UserButtonAction" getSupertip="GetUserButtonTip" tag="5"/>
+          <button id="user6" getImage="GetUserButtonImage" getLabel="GetUserButtonLabel" getVisible="GetUserButtonVisible" onAction="UserButtonAction" getSupertip="GetUserButtonTip" tag="6"/>
+          <button id="user7" getImage="GetUserButtonImage" getLabel="GetUserButtonLabel" getVisible="GetUserButtonVisible" onAction="UserButtonAction" getSupertip="GetUserButtonTip" tag="7"/>
+          <button id="user8" getImage="GetUserButtonImage" getLabel="GetUserButtonLabel" getVisible="GetUserButtonVisible" onAction="UserButtonAction" getSupertip="GetUserButtonTip" tag="8"/>
+          <button id="user9" getImage="GetUserButtonImage" getLabel="GetUserButtonLabel" getVisible="GetUserButtonVisible" onAction="UserButtonAction" getSupertip="GetUserButtonTip" tag="9"/>
+          <button id="user10" getImage="GetUserButtonImage" getLabel="GetUserButtonLabel" getVisible="GetUserButtonVisible" onAction="UserButtonAction" getSupertip="GetUserButtonTip" tag="10"/>
+          <button id="user11" getImage="GetUserButtonImage" getLabel="GetUserButtonLabel" getVisible="GetUserButtonVisible" onAction="UserButtonAction" getSupertip="GetUserButtonTip" tag="11"/>
+          <button id="user12" getImage="GetUserButtonImage" getLabel="GetUserButtonLabel" getVisible="GetUserButtonVisible" onAction="UserButtonAction" getSupertip="GetUserButtonTip" tag="12"/>
+          <button id="user13" getImage="GetUserButtonImage" getLabel="GetUserButtonLabel" getVisible="GetUserButtonVisible" onAction="UserButtonAction" getSupertip="GetUserButtonTip" tag="13"/>
+          <button id="user14" getImage="GetUserButtonImage" getLabel="GetUserButtonLabel" getVisible="GetUserButtonVisible" onAction="UserButtonAction" getSupertip="GetUserButtonTip" tag="14"/>
+          <button id="user15" getImage="GetUserButtonImage" getLabel="GetUserButtonLabel" getVisible="GetUserButtonVisible" onAction="UserButtonAction" getSupertip="GetUserButtonTip" tag="15"/>
+          <button id="user16" getImage="GetUserButtonImage" getLabel="GetUserButtonLabel" getVisible="GetUserButtonVisible" onAction="UserButtonAction" getSupertip="GetUserButtonTip" tag="16"/>
+          <button id="user17" getImage="GetUserButtonImage" getLabel="GetUserButtonLabel" getVisible="GetUserButtonVisible" onAction="UserButtonAction" getSupertip="GetUserButtonTip" tag="17"/>
+          <button id="user18" getImage="GetUserButtonImage" getLabel="GetUserButtonLabel" getVisible="GetUserButtonVisible" onAction="UserButtonAction" getSupertip="GetUserButtonTip" tag="18"/>
+        </group>
+
+      </tab>
+
+    </tabs>
+  </ribbon>
+</customUI>

@@ -1,0 +1,129 @@
+/**
+ * Copyright (c) 2017-2018 Structured Data, LLC
+ * 
+ * This file is part of BERT.
+ *
+ * BERT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * BERT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with BERT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+@import "./common.less";
+
+/** defaults to horizontal orientation (left and right) */
+.splitter-parent {
+
+  display: flex;
+  flex-direction: row;
+  
+  .splitter-child {
+
+    &:first-child {
+      order: 1;
+    }
+
+    &:nth-child(2) {
+      order: 3;
+    }
+
+  }
+
+
+  .splitter-splitter {
+
+    width: 1px;
+    background: #bbb;
+
+    z-index: 200; // we're now layering shells, so this needs to be > 100
+
+    /*
+    width: 13px;
+    background: #eee;
+    //border-left: 1px solid #ddd;
+    //border-right: 1px solid #ddd;
+    */
+
+    height: auto;
+    cursor: ew-resize;
+    order: 2;
+    position: relative;
+    overflow: visible;
+
+    &:after {
+      position: absolute;
+      width: 13px;
+      bottom: 0;
+      top: 0;
+      left: -6px;
+      //background: rgba(0,0,0,.1);
+      //left: 0px;
+      content: ' ';
+      overflow: hidden;
+    }
+
+  }
+
+}
+
+/** vertical orientation (top and bottom) */
+.splitter-parent.splitter-orientation-vertical {
+  flex-direction: column;
+
+  .splitter-splitter {
+    width: auto; 
+    height: 1px; 
+    cursor: ns-resize; 
+
+    &:after {
+      height: 13px;
+      right: 0;
+      width: 100%;
+      left: 0;
+      top: -6px;
+    }
+
+  }  
+}
+
+/** drag overlay. only need one for any number of splitters. */
+#splitter-drag-overlay {
+
+  z-index: 9999;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  cursor: ew-resize;
+
+  justify-content: center;
+  align-items: center;
+  display: none; 
+
+  &.visible { display: flex; }
+
+  &.splitter-orientation-vertical {
+    cursor: ns-resize;
+  }
+ 
+  /** indicator */
+  div {
+    position: relative;
+    border-radius: 2px;
+    color: #666;
+    padding: 4px 10px;
+    background: rgba( 255, 255, 255, .85);
+    box-shadow: @terminal-box-shadow;
+  }
+
+}
+

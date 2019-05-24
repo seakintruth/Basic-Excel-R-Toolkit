@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- 
+
+ Copyright (c) 2017-2018 Structured Data, LLC
+ 
+ This file is part of BERT.
+
+ BERT is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ BERT is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with BERT.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>BERT Console</title>
+    <link rel="stylesheet" href="node_modules/xterm/dist/xterm.css">
+    <link rel="stylesheet" href="ext/icomoon.css">
+    <link rel="stylesheet" href="ext/cogs/cogs.css">
+    <link rel="stylesheet" href="build/style.css">
+  </head>
+  <body>
+    
+    <!-- layout -->
+    <div id="main-window">
+
+      <!-- left/top component -->
+      <div id="editor"></div>
+
+      <!-- right/bottom component -->
+      <div id="terminals">
+      </div>
+
+    </div>
+
+    <script>
+
+      // see monaco electron sample for this
+
+      let cached_require = global.require;
+    </script>
+  	<script src="node_modules/monaco-editor/min/vs/loader.js"></script>
+    <script>
+      var amd_require = global.require;
+      global.require = cached_require;
+      require("./build/renderer.js")
+    </script>
+
+  </body>
+</html>

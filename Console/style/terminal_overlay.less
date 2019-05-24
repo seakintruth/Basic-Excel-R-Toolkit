@@ -1,0 +1,96 @@
+/**
+ * Copyright (c) 2017-2018 Structured Data, LLC
+ * 
+ * This file is part of BERT.
+ *
+ * BERT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * BERT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with BERT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+@import "./common.less";
+
+// --- busy --------------------------------------------------------------------
+
+@keyframes spin { 100% { transform:rotate(360deg); } }
+
+.terminal:after {
+  font-family: cogs;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  content: '\0056';
+  position: fixed;
+  //bottom: 4px;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  font-size: 45px;
+  opacity: 0;
+  transition: opacity 0.25s;
+  animation: spin 5s linear infinite;
+}
+
+.busy .terminal:after {
+  opacity: .25;
+}
+
+// --- tooltip -----------------------------------------------------------------
+
+.terminal-tooltip {
+  background: rgb(255, 255, 192);
+  border: 1px solid yellow;
+  border-radius: 2px;
+  padding: 2px;
+  position: absolute;
+  z-index: 100;
+  font-family: consolas;
+  font-size: 12px;
+  transition: opacity .1s;
+  opacity: 0;
+  top: 0px;
+  left: -1000px;
+}
+
+// --- autocomplete ------------------------------------------------------------
+
+.terminal-completion-list {
+  margin: 0;
+  padding: 0;
+
+  background: #fff;
+  border: 1px solid #ececec;
+  position: absolute;
+  z-index: 100;
+  top: 0px;
+  left: -1000px;
+  font-family: consolas;
+  font-size: 12px;
+  transition: opacity .1s;
+  opacity: 0;
+  box-shadow: @terminal-box-shadow;
+  overflow: auto;
+  max-height: 10em;
+
+}
+
+.terminal-completion-list li {
+  width: 100%;
+  cursor: default;
+  padding: 1px 4px;
+}
+
+.terminal-completion-list .active {
+  color: #fff;
+  background: #3879d9;
+}
